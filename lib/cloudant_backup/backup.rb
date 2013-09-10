@@ -1,9 +1,10 @@
+require 'date'
 require 'json'
 require 'rest_client'
 
 class CloudantBackup
   module Backup
-    attr_accessor :user, :password, :source, :target, :host, :date_pattern
+    attr_accessor :user, :password, :source, :target, :host, :date_pattern, :cloudant_host
 
     def initialize
     end
@@ -15,6 +16,8 @@ class CloudantBackup
 
     def create_target_db
       make_request(:put, target_db)
+    rescue RestClient::PreconditionFailed
+      # When the db existed already, we're fine with that
     end
 
     def replicate
@@ -32,7 +35,9 @@ class CloudantBackup
     end
 
     def host
-      @host || @user # Cloudant's default is username==hostname (for the main user)
+      return @host if @host
+      subdomain = @cloudant_host || @user # Cloudant's default is username==hostname (for the main user)
+      "#{subdomain}.cloudant.com"
     end
 
     def validate_options!
@@ -52,7 +57,7 @@ class CloudantBackup
     end
 
     def db_url(name)
-      "https://#{user}:#{password}@#{host}.cloudant.com/#{name}"
+      "https://#{user}:#{password}@#{host}/#{name}"
     end
 
     def make_request(method, url, data = nil)
