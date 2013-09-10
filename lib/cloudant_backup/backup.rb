@@ -40,7 +40,7 @@ class CloudantBackup
     end
 
     def target_db
-      "#{@source}-backup_#{date_string}"
+      @target || "#{@source}-backup_#{date_string}"
     end
 
     def target_db_url
