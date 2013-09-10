@@ -1,4 +1,4 @@
-Copyright (c) 2013 Jannis Hermanns
+Copyright (c) 2013 moviepilot.com
 
 MIT License
 
