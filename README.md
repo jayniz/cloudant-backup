@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Most simple case: replicate your production db to one automatically
+Most simple case. Replicate your production db to an automatically
 named backup db on cloudant:
 
 ```ruby
@@ -29,7 +29,7 @@ named backup db on cloudant:
   cb.password = 'password'
   cb.source   = 'my_production_db'
 
-  cb.replicate  # Backup my_production_db to my_production_db_backup_2013_09_10
+  cb.backup  # Backup my_production_db to my_production_db_backup_2013_09_10
 ```
 
 Create only one db per month (you can still update it daily):
@@ -39,7 +39,7 @@ Create only one db per month (you can still update it daily):
   [...]
   cb.date_pattern = '%Y_%m'  # Any strftime string works
 
-  cb.replicate
+  cb.backup
 ```
 
 Choose the target db name yourself:
@@ -49,7 +49,7 @@ Choose the target db name yourself:
   [...]
   cb.target = 'custom_target_db_name'
 
-  cb.replicate
+  cb.backup
 ```
 
 Use another user instead of your cloudant main user:
@@ -60,7 +60,7 @@ Use another user instead of your cloudant main user:
   cb.user = 'generated_api_key'
   cb.cloudant_host = 'mainuser'
 
-  cb.replicate
+  cb.backup
 ```
 
 Don't use cloudant at all, just copy one couchdb over to another:
@@ -70,7 +70,7 @@ Don't use cloudant at all, just copy one couchdb over to another:
   [...]
   cb.host = 'my-couchdb-instance.com'
 
-  cb.replicate
+  cb.backup
 ```
 
 Thank you for your business!
