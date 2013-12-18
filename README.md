@@ -68,7 +68,7 @@ Don't use cloudant at all, just copy one couchdb over to another:
 ```ruby
   cb = CloudantBackup.new
   [...]
-  cb.host = 'my-couchdb-instance.com'
+  cb.host = 'http://my-couchdb-instance.com:5984'
 
   cb.backup
 ```
