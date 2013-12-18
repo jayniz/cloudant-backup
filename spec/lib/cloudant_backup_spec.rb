@@ -67,7 +67,7 @@ describe CloudantBackup do
     it "creates the backup db" do
       cb.host   = 'my-couchdb.com'
       cb.target = 'custom-name'
-      url = "https://backup-user:password@my-couchdb.com/custom-name"
+      url = "http://backup-user:password@my-couchdb.com/custom-name"
       RestClient.should_receive(:put).with(url, options)
       cb.create_target_db
     end
@@ -75,9 +75,9 @@ describe CloudantBackup do
     it "triggers the replication" do
       cb.target = 'custom-name'
       cb.host   = 'my-couchdb.com'
-      url = "https://backup-user:password@my-couchdb.com/_replicate"
-      source_db = "https://backup-user:password@my-couchdb.com/production-db"
-      target_db = "https://backup-user:password@my-couchdb.com/custom-name"
+      url = "http://backup-user:password@my-couchdb.com/_replicate"
+      source_db = "http://backup-user:password@my-couchdb.com/production-db"
+      target_db = "http://backup-user:password@my-couchdb.com/custom-name"
       data = {
         source: source_db,
         target: target_db

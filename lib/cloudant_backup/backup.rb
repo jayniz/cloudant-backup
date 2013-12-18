@@ -28,6 +28,16 @@ class CloudantBackup
       make_request(:post, "_replicate", data)
     end
 
+    def host=(host)
+      parts = host.split("://")
+      if parts.length ==2
+        @protocol, @host = host.split("://")
+      else
+        @protocol = "http"
+        @host = host
+      end
+    end
+
     private
 
     def date_string
@@ -57,7 +67,11 @@ class CloudantBackup
     end
 
     def db_url(name)
-      "https://#{user}:#{password}@#{host}/#{name}"
+      "#{protocol}://#{user}:#{password}@#{host}/#{name}"
+    end
+
+    def protocol
+      @protocol || "https"
     end
 
     def make_request(method, url, data = nil)
