@@ -67,7 +67,11 @@ class CloudantBackup
     end
 
     def db_url(name)
-      "#{protocol}://#{user}:#{password}@#{host}/#{name}"
+      if user
+        "#{protocol}://#{user}:#{password}@#{host}/#{name}"
+      else
+        "#{protocol}://#{host}/#{name}"
+      end
     end
 
     def protocol
