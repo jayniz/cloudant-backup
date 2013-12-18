@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/jayniz/cloudant-backup.png)](https://travis-ci.org/jayniz/cloudant-backup)
 # CloudantBackup
 
 Easily backup a cloudant db using replication. This gem wraps
